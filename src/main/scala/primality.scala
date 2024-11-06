@@ -36,3 +36,18 @@ def is_prime_sqrt_optimized(num:Int) : Boolean = {
     true
   }
 }
+
+def is_prime_mod6(num:Int) : Boolean = {
+  if num < 2 then false
+  else if num == 2 then true
+  else if num % 2 == 0 | num % 3 == 0 then false
+  else {
+    var limit = (sqrt(num) + 1).toInt
+    for i <- 5 to limit by 6 do{
+      if num % i == 0 | num % (i+2) == 0 then {
+        return false
+      }
+    }
+      true
+  }
+}

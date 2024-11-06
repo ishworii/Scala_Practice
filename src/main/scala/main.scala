@@ -1,4 +1,11 @@
-import scala.io.StdIn.readLine
+def time[T](block: => T) : T ={
+  val before = System.nanoTime
+  val result = block
+  val after = System.nanoTime
+  println("Elapsed time " + (after-before)/1e6+ "ms")
+  result
+}
+
 
 def print_primes(arr: Vector[Int]): Unit = {
   arr.zipWithIndex.foreach { case (element, index) =>
@@ -9,12 +16,10 @@ def print_primes(arr: Vector[Int]): Unit = {
 
 @main
 def main(): Unit = {
-  println("Enter the number upto which you want to generate primes?")
-  val limit = readLine().toInt
-  var primes:Vector[Int] = Vector()
-  for i <- 1 until (limit+1) do{
-    if is_prime_sqrt(i) then primes = primes :+ i
-  }
-  print_primes(primes)
+  val limit:Int = 99_991_949
+  time(is_prime_basic(limit))
+  time(is_prime_sqrt(limit))
+  time(is_prime_sqrt_optimized(limit))
+  time(is_prime_mod6(limit))
 
 }
